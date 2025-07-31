@@ -1,0 +1,67 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  background: #180909;
+}
+
+.container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  /* 3d effect */
+  transform-style: preserve-3d;
+  transform: perspective(1000px);
+}
+
+.container .item {
+  width: 10rem;
+  height: 20rem;
+  transition: 0.5s;
+  filter: brightness(0);
+  cursor: pointer;
+}
+
+.container .item:hover {
+  filter: brightness(1);
+  transform: translateZ(200px);
+}
+
+/* Hover on right siblings */
+.container .item:hover + * {
+  filter: brightness(0.6);
+  transform: translateZ(150px) rotateY(40deg);
+}
+
+.container .item:hover + * + * {
+  filter: brightness(0.4);
+  transform: translateZ(70px) rotateY(20deg);
+}
+
+/* Hover on left siblings */
+/* :has selector may not be fully supported on all browsers */
+.container .item:has(+ *:hover) {
+  filter: brightness(0.6);
+  transform: translateZ(150px) rotateY(-40deg);
+}
+
+.container .item:has(+ * + *:hover) {
+  filter: brightness(0.4);
+  transform: translateZ(70px) rotateY(-20deg);
+}
+
+.item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none; /* avoid interfering with hover */
+}
