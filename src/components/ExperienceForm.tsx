@@ -47,14 +47,6 @@ export function ExperienceForm({
             className="w-full p-3 border rounded-lg"
             required
           />
-          <input
-            type="text"
-            placeholder="Homestay location"
-            value={newExperience.location}
-            onChange={(e) => setNewExperience((prev) => ({ ...prev, location: e.target.value }))}
-            className="w-full p-3 border rounded-lg"
-            required
-          />
           <div>
             <label className="block text-sm font-medium mb-2">Rating</label>
             <select
