@@ -7,30 +7,39 @@ import { ExperiencesSection } from './components/ExperienceSection';
 import { ExperienceForm } from './components/ExperienceForm';
 import { Footer } from './components/Footer';
 import { Experience } from './type';
+
 export default function App() {
   const [experiences, setExperiences] = useState<Experience[]>([
     {
-      id: '1',
-      name: 'Sarah Johnson',
-      location: 'Mountain View Cabin',
-      rating: 5,
-      date: '2024-01-15',
-      story:
-        'Waking up to the sound of birds and mountain views was pure magic. The hosts were incredibly welcoming and the home-cooked meals were unforgettable.',
-      image:
-        'https://images.unsplash.com/photo-1622150736551-03defd21c5cd?ixid=M3w3MjUzNDh8MHwxfHNlYXJjaHwxfHxtb3VudGFpbiUyMGhvbWVzdGF5JTIwbmF0dXJlJTIwbGFuZHNjYXBlJTIwY296eSUyMGNhYmlufGVufDB8fHx8MTc1MTI1NDA4N3ww&ixlib=rb-4.1.0',
-    },
-    {
-      id: '2',
-      name: 'Michael Chen',
-      location: 'Forest Retreat',
-      rating: 5,
-      date: '2024-01-08',
-      story:
-        'The perfect escape from city life. Hiking trails right from the doorstep and evenings by the fireplace were exactly what I needed.',
-      image:
-        'https://images.unsplash.com/photo-1689693780003-d7ba1d9befa2?ixid=M3w3MjUzNDh8MHwxfHNlYXJjaHwyfHxtb3VudGFpbiUyMGhvbWVzdGF5JTIwbmF0dXJlJTIwbGFuZHNjYXBlJTIwY296eSUyMGNhYmlufGVufDB8fHx8MTc1MTI1NDA4N3ww&ixlib=rb-4.1.0',
-    },
+    id: '1',
+    name: 'Priya Sharma',
+    location: 'Kainchi Dham, Nainital',
+    rating: 5,
+    date: '2024-02-10',
+    story:
+      'The serene environment and warm hospitality made my stay unforgettable. The views of the hills were breathtaking.',
+    image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80',
+  },
+  {
+    id: '2',
+    name: 'Rajesh Verma',
+    location: 'Kainchi Dham, Nainital',
+    rating: 4,
+    date: '2024-02-15',
+    story:
+      'A perfect getaway from city life, enjoying fresh mountain air and local culture at RedLeaf Homestay.',
+    image: 'https://images.unsplash.com/photo-1523413651479-597eb2da0ad6?auto=format&fit=crop&w=800&q=80',
+  },
+  {
+    id: '3',
+    name: 'Anita Singh',
+    location: 'Kainchi Dham, Nainital',
+    rating: 5,
+    date: '2024-02-20',
+    story:
+      'Loved the warmth of the hosts and the authentic home-cooked meals. Nature walks nearby were refreshing!',
+    image: 'https://images.unsplash.com/photo-1549887534-77e1dbf1a25c?auto=format&fit=crop&w=800&q=80',
+  },
   ]);
 
   const [newExperience, setNewExperience] = useState({
@@ -43,6 +52,7 @@ export default function App() {
 
   const [showForm, setShowForm] = useState(false);
 
+  // Form submission handler
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const experience: Experience = {
@@ -55,12 +65,13 @@ export default function App() {
     setShowForm(false);
   };
 
+  // Image upload handler
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       const reader = new FileReader();
-      reader.onload = (e) => {
-        setNewExperience((prev) => ({ ...prev, image: e.target?.result as string }));
+      reader.onload = () => {
+        setNewExperience((prev) => ({ ...prev, image: reader.result as string }));
       };
       reader.readAsDataURL(file);
     }
@@ -83,7 +94,7 @@ export default function App() {
           onImageUpload={handleImageUpload}
         />
       )}
-      <ExperiencesSection />
+      <ExperiencesSection experiences={experiences} />
       <GallerySection />
       <Footer />
     </div>
